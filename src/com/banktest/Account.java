@@ -12,6 +12,7 @@ public class Account {
     }
 
     public double deposit(double amount) {
+        if (amount <= 0) throw new ArithmeticException("Cannot deposit a negative sum!");
         balance += amount;
         return balance;
     }
