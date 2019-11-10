@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class AccountTest {
 
@@ -15,18 +17,21 @@ class AccountTest {
         assertEquals(account.getBalance(), 0);
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(ints = {25, 50, 75})
     @DisplayName("deposit() should add to the balance")
-    void deposit() {
-        account.deposit(100);
-        assertEquals(account.getBalance(), 100);
+    void deposit(int amount) {
+        account.deposit(amount);
+        assertEquals(account.getBalance(), amount);
     }
 
-    @Test
-    @DisplayName("withdraw() should substract from the balance")
-    void withdraw() {
+    @ParameterizedTest
+    @ValueSource(ints = {25, 50, 75})
+    @DisplayName("withdraw() should subtract from the balance")
+    void withdraw(int amount) {
         account.deposit(100);
-        account.withdraw(50);
-        assertEquals(account.getBalance(), 50);
+        account.withdraw(amount);
+        assertEquals(account.getBalance(), 100 - amount);
     }
+
 }
