@@ -24,9 +24,9 @@ class AccountTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {25, 50, 75})
+    @ValueSource(doubles = {25.25, 500.56, 75})
     @DisplayName("deposit() should add to the balance")
-    void deposit(int amount) {
+    void deposit(double amount) {
         account.deposit(amount);
         assertEquals(account.getBalance(), amount);
     }
@@ -41,9 +41,9 @@ class AccountTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {-1, -10, -40})
+    @ValueSource(doubles = {-1, -10.56, -40})
     @DisplayName("deposit raises an error when passed a negative number")
-    void depositRaisesErrorWithNegative(int negativeAmount) {
+    void depositRaisesErrorWithNegative(double negativeAmount) {
         Exception exception = assertThrows(ArithmeticException.class, () -> {
             account.deposit(negativeAmount);
         });
